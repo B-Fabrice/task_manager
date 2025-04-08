@@ -7,7 +7,7 @@ class AppButton extends StatelessWidget {
   final bool disabled;
   final bool loading;
   final Color color;
-  final Color background;
+  final Color? background;
   final bool rounded;
   final Widget? prefix;
   final void Function()? onTap;
@@ -17,7 +17,7 @@ class AppButton extends StatelessWidget {
     this.disabled = false,
     this.loading = false,
     this.color = white,
-    this.background = secondary,
+    this.background,
     this.rounded = false,
     this.prefix,
     this.onTap,
@@ -34,7 +34,8 @@ class AppButton extends StatelessWidget {
             width: double.infinity,
             duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
-              color: primary.withValues(alpha: disabled ? 0.6 : 1),
+              color:
+                  background ?? primary.withValues(alpha: disabled ? 0.6 : 1),
               borderRadius: BorderRadius.circular(
                 rounded ? roundRadius : borderRadius,
               ),

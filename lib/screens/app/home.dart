@@ -101,7 +101,17 @@ class HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     final tasksStream = ref.watch(TaskService.tasksStream);
-    final tasks = tasksStream.value ?? [];
+    final tasks =
+        (tasksStream.value ?? []).where((task) {
+          if (query.isEmpty) return true;
+          final isTitle = task.title.toLowerCase().contains(
+            query.toLowerCase(),
+          );
+          final isDescription = task.description.toLowerCase().contains(
+            query.toLowerCase(),
+          );
+          return isTitle || isDescription;
+        }).toList();
 
     switch (sortBy) {
       case SortBy.status:
@@ -152,20 +162,30 @@ class HomeState extends ConsumerState<Home> {
           ],
         ),
         const SizedBox(height: padding),
-        ListView.separated(
-          itemBuilder: (context, index) {
-            final task = tasks[index];
-            return TaskCard(task: task);
-          },
-          separatorBuilder:
-              (context, index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: const Divider(),
+        tasks.isNotEmpty
+            ? ListView.separated(
+              itemBuilder: (context, index) {
+                final task = tasks[index];
+                return TaskCard(task: task);
+              },
+              separatorBuilder:
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: const Divider(),
+                  ),
+              itemCount: tasks.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+            )
+            : SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Center(
+                child: Text(
+                  'No tasks found',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
-          itemCount: tasks.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-        ),
+            ),
       ],
     );
   }

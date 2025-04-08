@@ -7,6 +7,7 @@ import 'package:task_manager/layouts/modal_layout.dart';
 import 'package:task_manager/modals/snackbar.dart';
 import 'package:task_manager/models/task.dart';
 import 'package:task_manager/services/task_service.dart';
+import 'package:task_manager/theme/colors.dart';
 import 'package:task_manager/utils.dart';
 import 'package:task_manager/widgets/app_button.dart';
 import 'package:task_manager/widgets/form_field.dart';
@@ -109,6 +110,24 @@ class _EditTaskModalState extends ConsumerState<EditTaskModal> {
           loading = false;
         });
       }
+    }
+  }
+
+  Future<void> handleDelete() async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      await TaskService.deleteTask(widget.task.id);
+      showSnackbar('Task deleted successfully', MessageType.success);
+      if (!mounted) return;
+      Navigator.pop(context);
+    } catch (e) {
+      showSnackbar('Error deleting task', MessageType.error);
+    } finally {
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -320,10 +339,9 @@ class _EditTaskModalState extends ConsumerState<EditTaskModal> {
               Expanded(
                 flex: 2,
                 child: AppButton(
-                  text: 'Cancel',
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  text: 'Delete Task',
+                  background: red,
+                  onTap: handleDelete,
                 ),
               ),
             ],
