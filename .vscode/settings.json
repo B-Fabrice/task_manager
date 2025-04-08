@@ -3,6 +3,7 @@
         "cupertino",
         "Firestore",
         "iconify",
+        "iconoir",
         "riverpod"
     ]
 }

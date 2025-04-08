@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/screens/app/app_screen.dart';
+import 'package:task_manager/screens/auth/login.dart';
+import 'package:task_manager/services/notification_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +20,21 @@ class SplashScreenState extends State<SplashScreen> {
 
   Future<void> initApp() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (mounted) {}
+    final auth = FirebaseAuth.instance;
+    final nextWidget = auth.currentUser != null ? AppScreen() : Login();
+    if (auth.currentUser != null) {
+      await NotificationService.initialize();
+    }
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return nextWidget;
+          },
+        ),
+      );
+    }
   }
 
   @override
