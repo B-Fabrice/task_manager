@@ -1,9 +1,9 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_manager/constants.dart';
 import 'package:task_manager/models/notification.dart';
@@ -12,7 +12,7 @@ class NotificationService {
   static final fireMessage = FirebaseMessaging.instance;
   static final firestore = FirebaseFirestore.instance;
   static final collection = collections.notifications;
-  static final notificationsPlugin = FlutterLocalNotificationsPlugin();
+  // static final notificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
     await fireMessage.requestPermission();
@@ -25,20 +25,20 @@ class NotificationService {
       return fireMessageBackgroundHandler(message);
     });
 
-    InitializationSettings initializationSettings = InitializationSettings(
-      android: const AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: DarwinInitializationSettings(
-        requestSoundPermission: true,
-        requestBadgePermission: true,
-        requestAlertPermission: true,
-      ),
-    );
+    // InitializationSettings initializationSettings = InitializationSettings(
+    //   android: const AndroidInitializationSettings('@mipmap/ic_launcher'),
+    //   iOS: DarwinInitializationSettings(
+    //     requestSoundPermission: true,
+    //     requestBadgePermission: true,
+    //     requestAlertPermission: true,
+    //   ),
+    // );
 
-    notificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse:
-          (NotificationResponse notificationResponse) {},
-    );
+    // notificationsPlugin.initialize(
+    //   initializationSettings,
+    //   onDidReceiveNotificationResponse:
+    //       (NotificationResponse notificationResponse) {},
+    // );
   }
 
   static Future<void> fireMessageBackgroundHandler(
@@ -96,37 +96,37 @@ class NotificationService {
   static showNotification(RemoteMessage notification) async {
     final auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
-      try {
-        final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-        const NotificationDetails notificationDetails = NotificationDetails(
-          android: AndroidNotificationDetails(
-            'default_channel_id',
-            'Default Channel',
-            channelDescription: 'This is the default channel',
-            importance: Importance.max,
-            priority: Priority.high,
-            ticker: 'ticker',
-            playSound: true,
-            enableLights: true,
-            enableVibration: true,
-            visibility: NotificationVisibility.public,
-          ),
-          iOS: DarwinNotificationDetails(
-            sound: 'default',
-            presentSound: true,
-            presentAlert: true,
-            presentBadge: true,
-          ),
-        );
+      // try {
+      //   final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      //   const NotificationDetails notificationDetails = NotificationDetails(
+      //     android: AndroidNotificationDetails(
+      //       'default_channel_id',
+      //       'Default Channel',
+      //       channelDescription: 'This is the default channel',
+      //       importance: Importance.max,
+      //       priority: Priority.high,
+      //       ticker: 'ticker',
+      //       playSound: true,
+      //       enableLights: true,
+      //       enableVibration: true,
+      //       visibility: NotificationVisibility.public,
+      //     ),
+      //     iOS: DarwinNotificationDetails(
+      //       sound: 'default',
+      //       presentSound: true,
+      //       presentAlert: true,
+      //       presentBadge: true,
+      //     ),
+      //   );
 
-        await notificationsPlugin.show(
-          id,
-          notification.notification?.title,
-          notification.notification?.body,
-          notificationDetails,
-          payload: jsonEncode(notification.data),
-        );
-      } on Exception catch (_) {}
+      //   await notificationsPlugin.show(
+      //     id,
+      //     notification.notification?.title,
+      //     notification.notification?.body,
+      //     notificationDetails,
+      //     payload: jsonEncode(notification.data),
+      //   );
+      // } on Exception catch (_) {}
     }
   }
 
