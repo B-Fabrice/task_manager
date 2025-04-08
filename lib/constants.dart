@@ -13,3 +13,5 @@ final collections = Collections();
 enum TaskStatus { pending, inProgress, completed, cancelled }
 
 enum TaskPriority { low, medium, high }
+
+enum SortBy { status, priority, date }
