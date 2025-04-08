@@ -35,6 +35,7 @@ TextTheme appTextTheme(TextTheme commonTextTheme) {
 ThemeData lightTheme() {
   return ThemeData(
     useMaterial3: true,
+    brightness: Brightness.light,
     scaffoldBackgroundColor: background,
     primaryColorDark: darkBackground,
     textTheme: () {
@@ -68,12 +69,24 @@ ThemeData lightTheme() {
       ),
     ),
     iconTheme: IconThemeData(color: secondary),
+    radioTheme: RadioThemeData(
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return primary;
+        }
+        return darkBackground;
+      }),
+      overlayColor: WidgetStateProperty.all(primary.withValues(alpha: 0.3)),
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(color: primary),
+    cardColor: darkBackground,
   );
 }
 
 ThemeData darkTheme() {
   return ThemeData(
     useMaterial3: true,
+    brightness: Brightness.dark,
     scaffoldBackgroundColor: darkBackground,
     primaryColorDark: background,
     textTheme: () {
@@ -107,5 +120,15 @@ ThemeData darkTheme() {
       ),
     ),
     iconTheme: IconThemeData(color: white),
+    radioTheme: RadioThemeData(
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return primary;
+        }
+        return background;
+      }),
+      overlayColor: WidgetStateProperty.all(primary.withValues(alpha: 0.3)),
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(color: grey),
   );
 }

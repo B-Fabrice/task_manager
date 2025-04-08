@@ -91,6 +91,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
               setState(() {
                 submitted = true;
               });
+              FocusScope.of(context).unfocus();
               formKey.currentState!.validate();
               resetPassword();
             },

@@ -34,7 +34,7 @@ class AppButton extends StatelessWidget {
             width: double.infinity,
             duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
-              color: background.withValues(alpha: disabled ? 0.6 : 1),
+              color: primary.withValues(alpha: disabled ? 0.6 : 1),
               borderRadius: BorderRadius.circular(
                 rounded ? roundRadius : borderRadius,
               ),

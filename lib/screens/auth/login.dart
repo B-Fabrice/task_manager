@@ -160,6 +160,7 @@ class LoginState extends State<Login> {
               setState(() {
                 submitted = true;
               });
+              FocusScope.of(context).unfocus();
               formKey.currentState!.validate();
               signIn();
             },

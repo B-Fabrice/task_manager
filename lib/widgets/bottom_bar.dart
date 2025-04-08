@@ -16,6 +16,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Duration duration = const Duration(milliseconds: 250);
+    final bg = Theme.of(context).bottomAppBarTheme.color;
     return Material(
       elevation: 10.0,
       child: Container(
@@ -34,14 +35,14 @@ class BottomBar extends StatelessWidget {
                   },
                   child: AnimatedContainer(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
+                      horizontal: 40,
                       vertical: 12,
                     ),
                     duration: duration,
                     decoration: BoxDecoration(
                       color:
                           isSelected
-                              ? primary.withValues(alpha: 0.075)
+                              ? bg?.withValues(alpha: 0.075)
                               : Colors.transparent,
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                     ),
@@ -49,13 +50,22 @@ class BottomBar extends StatelessWidget {
                       children: <Widget>[
                         IconifyIcon(
                           icon: item.icon,
-                          color: isSelected ? primary : Colors.grey,
+                          color: isSelected ? bg : grey,
                         ),
                         const SizedBox(width: 10.0),
                         AnimatedSize(
                           duration: duration,
                           curve: Curves.easeInOut,
-                          child: Text(isSelected ? item.text : ''),
+                          child: Text(
+                            isSelected ? item.text : '',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium!.copyWith(
+                              color: isSelected ? bg : grey,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
                       ],
                     ),

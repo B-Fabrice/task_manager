@@ -64,6 +64,7 @@ class SignUpState extends State<SignUp> {
         });
         return;
       }
+      showSnackbar('Account created successfully', MessageType.success);
       await NotificationService.initialize();
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -174,6 +175,7 @@ class SignUpState extends State<SignUp> {
               setState(() {
                 submitted = true;
               });
+              FocusScope.of(context).unfocus();
               formKey.currentState!.validate();
               signUp();
             },

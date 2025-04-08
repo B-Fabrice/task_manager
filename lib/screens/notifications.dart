@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconify_design/iconify_design.dart';
 import 'package:task_manager/constants.dart';
-import 'package:task_manager/layouts/screen_layout.dart';
 import 'package:task_manager/services/notification_service.dart';
 import 'package:task_manager/theme/colors.dart';
 import 'package:task_manager/utils.dart';
@@ -14,12 +13,14 @@ class Notifications extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stream = ref.watch(NotificationService.userNotificationStream);
+    final color = Theme.of(context).primaryColorDark;
     final notifications = stream.value ?? [];
     notifications.sort((a, b) {
       return b.createdAt.compareTo(a.createdAt);
     });
     final theme = Theme.of(context);
-    return ScreenLayout(
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -37,10 +38,7 @@ class Notifications extends ConsumerWidget {
                         height: 180,
                         padding: EdgeInsets.all(padding),
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 8,
-                            // color: black,
-                          ),
+                          border: Border.all(width: 8, color: color),
                           borderRadius: BorderRadius.circular(180),
                         ),
                         alignment: Alignment.center,
@@ -49,7 +47,7 @@ class Notifications extends ConsumerWidget {
                           height: 100,
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                            // color: black,
+                            color: color,
                             borderRadius: BorderRadius.circular(100),
                             boxShadow: [
                               BoxShadow(
@@ -68,7 +66,6 @@ class Notifications extends ConsumerWidget {
                             ),
                             child: IconifyIcon(
                               icon: 'mdi:bell-remove-outline',
-                              // color: black,
                               size: 20,
                             ),
                           ),

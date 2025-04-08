@@ -4,6 +4,11 @@
         "Firestore",
         "iconify",
         "iconoir",
-        "riverpod"
+        "iwwa",
+        "lucide",
+        "mingcute",
+        "riverpod",
+        "tabler",
+        "uicons"
     ]
 }
