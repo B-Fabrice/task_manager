@@ -44,8 +44,8 @@ class _ModeModalState extends ConsumerState<ModeModal> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final modes = [
-      ListItem(title: 'Light', value: lightTheme()),
-      ListItem(title: 'Dark', value: darkTheme()),
+      ListItem(title: 'Light', value: lightTheme),
+      ListItem(title: 'Dark', value: darkTheme),
       ListItem(title: 'System', value: null),
     ];
     return ModalLayout(

@@ -1,16 +1,50 @@
-# task_manager
+# 🚀 Flutter Project Setup Guide
 
-A new Flutter project.
+This is a Flutter application built using the latest stable versions of Flutter, Dart, and Java. This guide explains how to set up your development environment, install dependencies, run the project, and contribute.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧰 Requirements
 
-A few resources to get you started if this is your first Flutter project:
+Before getting started, here is used flutter and jdk during development:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter:** 3.29.2  
+- **Dart:** 3.7.2  
+- **Java:** 21.0.6 (LTS)  
+- **DevTools:** 2.42.3
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> **Note:** Ensure `flutter` and `dart` are properly added to your system's PATH.
+
+---
+
+## 📦 Installation & Setup
+
+### 1. Clone the Repository
+
+Clone the project repository and navigate into it:
+
+```bash
+git clone https://github.com/your-username/your-flutter-project.git
+cd your-flutter-project
+
+```bash
+# Check if flutter is installed correctly
+flutter doctor
+
+# Get dependencies
+flutter pub get
+```
+
+### 2. Configure IDE
+
+For the best development experience, we recommend using:
+- Visual Studio Code with Flutter extension
+- Android Studio with Flutter plugin
+
+### 3. Run the Application
+
+Launch the app in debug mode:
+
+```bash
+flutter run
+```

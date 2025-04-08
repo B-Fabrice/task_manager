@@ -20,11 +20,13 @@ class MyApp extends ConsumerWidget {
     final theme = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Task Manager',
-      theme: theme ?? lightTheme(),
-      darkTheme: theme ?? darkTheme(),
+      theme: theme ?? lightTheme,
+      darkTheme: theme ?? darkTheme,
       scaffoldMessengerKey: messengerKey,
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
+
+//

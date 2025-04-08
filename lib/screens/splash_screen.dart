@@ -27,7 +27,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     final mode = await StorageService.getMode();
     if (mode != null) {
       final data = mode == 'dark' ? darkTheme : lightTheme;
-      ref.read(themeProvider.notifier).state = data();
+      ref.read(themeProvider.notifier).state = data;
     }
     await Future.delayed(const Duration(seconds: 2));
     final nextWidget = auth.currentUser != null ? AppScreen() : Login();
